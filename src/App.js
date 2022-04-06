@@ -1,5 +1,4 @@
 import React, { useRef, useState } from "react"; 
-import Counter from "./components/Counter";
 import PostItem from "./components/PostItem";
 import PostList from "./components/PostList";
 import './styles/App.css';
