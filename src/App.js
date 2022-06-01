@@ -62,7 +62,11 @@ function App() {
         </div>
         {posts.length
             ?
-            <PostList remove = {removePost} posts={sortedPost} title = 'Посты по JS' />
+            <PostList  
+            remove = {removePost}
+            posts={sortedPost} 
+            title = 'Посты по JS'
+            />
             :
             <h1 style= {{textAlign : "center"}}>
                 Постов нет епта !!!
