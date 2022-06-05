@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react"; 
+import React, { useMemo, useRef, useState } from "react"; 
 import PostItem from "./components/PostItem";
 import PostList from "./components/PostList";
 import './styles/App.css';
@@ -9,24 +9,28 @@ import PostForm from "./components/PostForm";
 
 function App() {
     const [posts, setPosts] = useState([
-        {id: 1, title: 'Javascript', body: 'Description'},
-        {id: 2, title: 'Javascript 2', body: 'Description'},
-        {id: 3, title: 'Javascript 3', body: 'Description'},
+        {id: 1, title: 'гг', body: 'аа'},
+        {id: 2, title: 'аа', body: 'бб'},
+        {id: 3, title: 'вв', body: 'яя'},
     ])
 
     const [selectedSort, setSelectedSort] = useState('')
     const [searchQuery, setSearchQuery] = useState('')
-
-    function getSortedPost(){
-        console.log('Отработала функция соритровки постов')
+    
+    const sortedPosts = useMemo(() => {
         if(selectedSort){
             return [...posts].sort((a,b) => a[selectedSort].localeCompare(b[selectedSort]))
         }
         else
         return posts
-    }   
+    }, [selectedSort, posts])
 
-    const sortedPost = getSortedPost()
+    const sortedAndSearchedPosts = useMemo(() => { 
+
+        return sortedPosts.filter(
+            post => post.title.includes(searchQuery))
+
+    }, [searchQuery, sortedPosts])
 
     const createPost = (newPost) => {
         setPosts([...posts, newPost])
@@ -53,6 +57,7 @@ function App() {
             <MySelect
             value = { selectedSort }
             onChange = {sortPost}
+            style={{color: 'white'}}
             defaultValue="Сортировка"
             options = {[
                 { value: 'title', name: 'По названию' },
@@ -64,7 +69,7 @@ function App() {
             ?
             <PostList  
             remove = {removePost}
-            posts={sortedPost} 
+            posts={sortedAndSearchedPosts} 
             title = 'Посты по JS'
             />
             :
