@@ -1,15 +1,16 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import MyButton from "./UI/button/MyButton";
 
 const PostItem = ({remove,  ...props}) => {
-
+    
     const removePostId = () => {
-
+        
         remove(props.post)
     }
 
-    const router = useNavigate() 
+    let {id} = useParams()
+    id = JSON.stringify(props.post.id)
 
     return(
         <div className="post">
@@ -20,7 +21,7 @@ const PostItem = ({remove,  ...props}) => {
                 </div>
             </div>
             <div className = 'post__btns'>
-                <MyButton onClick = {removePostId}>Открыть</MyButton>
+                <MyButton> <Link to={`/posts/${id}`}> Открыть </Link> </MyButton>
                 <MyButton onClick = {removePostId}>Удалить</MyButton>
             </div>
         </div>
