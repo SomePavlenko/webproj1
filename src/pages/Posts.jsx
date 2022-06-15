@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react"; 
-import PostList from "./components/PostList";
-import MyButton from "./components/UI/button/MyButton";
-import PostForm from "./components/PostForm";
-import PostFilter from "./components/PostFilter";
-import MyModal from "./components/UI/MyModal/MyModal";
-import { usePosts } from "./hooks/usePosts";
-import PostService from "./API/PostService";
-import Loader from "./components/UI/Loader/Loader";
-import { useFetching } from "./hooks/useFetching";
-import { getPageCount } from "./utils/pages";
-import Pagination from "./components/UI/Pagination/Pagination";
+import PostService from '../API/PostService';
+import { useFetching } from '../hooks/useFetching';
+import { getPageCount } from '../utils/pages';
+import MyButton from '../components/UI/button/MyButton';
+import MyModal from '../components/UI/MyModal/MyModal';
+import PostFilter from '../components/PostFilter';
+import PostList from '../components/PostList';
+import Pagination from '../components/UI/Pagination/Pagination';
+import PostForm from '../components/PostForm';
+import Loader from '../components/UI/Loader/Loader';
+import { usePosts } from "../hooks/usePosts";
 
 function Posts() {
     const [posts, setPosts] = useState([])
@@ -19,7 +19,7 @@ function Posts() {
     const [limit, setLimit] = useState(10);
     const [page, setPage] = useState(1);
     const sortedAndSearchedPosts = usePosts(posts, filter.sort, filter.query);
-    
+
     const [fetchPosts, isPostsLoading, postError] = useFetching(async (limit, page) => {
         const response = await PostService.getAll(limit,page)
         setPosts(response.data)

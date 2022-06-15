@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import MyButton from "./UI/button/MyButton";
 
 const PostItem = ({remove,  ...props}) => {
@@ -8,6 +9,7 @@ const PostItem = ({remove,  ...props}) => {
         remove(props.post)
     }
 
+    const router = useNavigate() 
 
     return(
         <div className="post">
@@ -17,9 +19,10 @@ const PostItem = ({remove,  ...props}) => {
                 {props.post.body}
                 </div>
             </div>
-            <divc className = 'post__btns'>
+            <div className = 'post__btns'>
+                <MyButton onClick = {removePostId}>Открыть</MyButton>
                 <MyButton onClick = {removePostId}>Удалить</MyButton>
-            </divc>
+            </div>
         </div>
     );
 };
