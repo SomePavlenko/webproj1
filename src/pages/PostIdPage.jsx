@@ -1,9 +1,10 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { useFetching } from '../hooks/useFetching';
 import { useEffect, useState } from 'react';
 import PostService from '../API/PostService';
 import Loader from '../components/UI/Loader/Loader';
+import MyButton from '../components/UI/button/MyButton';
 
 const PostIdPage = () => {
 
@@ -26,7 +27,6 @@ const PostIdPage = () => {
 
     return (
         <div>
-            abobus
             {isLoading
             ? <Loader/>
             :<div> {post.id}. {post.title} </div>
@@ -50,6 +50,12 @@ const PostIdPage = () => {
                 )}
             </div>
             }
+            <div style={{textAlign: 'center', padding: 20}}>
+            <MyButton 
+                style={{width: 200, height: 50}}> 
+                <Link to="/posts"> Назад </Link>
+            </MyButton>
+            </div>
         </div>
     );
 };
