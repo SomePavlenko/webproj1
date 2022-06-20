@@ -1,26 +1,39 @@
 import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
-import MyButton from '../components/UI/button/MyButton';
-import MyInput from '../components/UI/input/MyInput';
 import { AuthContext } from '../context';
 import '../styles/Login.css'
+import { useState } from 'react';
 
 const Login = () => {
     const { isAuth, setIsAuth } = useContext(AuthContext)
+    const [errorAuth, setErrorAuth] = useState('')
 
-    const login = event => {
+    let userdata = {
+        login: 'admin',
+        password: 'admin'
+    }
+
+    const login = () => {
         // alert(JSON.stringify(event))
         // event.preventDefault();
         setIsAuth(true);
         localStorage.setItem('auth', 'true')
+        setErrorAuth('')
     }
 
 
     const onSubmit = (event) => {
-        console.log(event.login, event.password);
-
-
-        login(event)
+        if (userdata.login === event.login && userdata.password === event.password) {
+            login()
+        }
+        else if (userdata.login === event.login && userdata.password !== event.password) {
+            setErrorAuth('Пароль введен не верно')
+        }
+        else if (userdata.login !== event.login && userdata.password === event.password) {
+            setErrorAuth('Логин введен не верно')
+        }
+        else
+            setErrorAuth('Данные не верны')
     }
 
     const {
@@ -35,46 +48,50 @@ const Login = () => {
 
     return (
         <>
-            <div className='AuthForm'>
-                <h1>Если ты не гомосек, то зайди за пару сек</h1>
-                <form onSubmit={handleSubmit(onSubmit)} className='form'>
-                    <label>
-                        Login
-                        <div className='input'>
-                        <MyInput 
-                            {...register('login', {
-                                required: "Уважаемый, случилась ошибка",
-                                minLength: {
-                                    value: 3,
-                                    message: 'Уважаемый, минимальная длинна 3 символа'
-                                }
-                            })}
-                        />
-                        </div>
-                    </label>
-                    {errors?.login && <p style={{ height: 40 }}> {errors?.login?.message || 'Error'}</p>}
 
-                    <label  className='input' >
-                        Password
-                        <div className='input'>
-                        <MyInput 
-                            {...register('password', {
-                                required: "Уважаемый, случилась ошибка",
-                                minLength: {
-                                    value: 3,
-                                    message: 'Уважаемый, минимальная длинна 3 символа'
-                                }
-                            })}
-                        />
-                        </div>
-                    </label>
-                    {errors?.password && <p style={{ height: 40 }}> {errors?.password?.message || 'Error'}</p>}
-                    <div  className='button'>
-                    <MyButton>Войти</MyButton>
-                    </div>
+            <div id="wrapper">
+                <h1>Sign In Form</h1>
+                <form onSubmit={handleSubmit(onSubmit)} id="signin" method="" action="" autocomplete="off">
+
+                    <input {...register('login', {
+                        required: "Уважаемый, поле username обязательно к заполнению",
+                        minLength: {
+                            value: 3,
+                            message: 'Уважаемый, минимальная длинна username 3 символа'
+                        }
+                    })}
+                        type="text" id="user" placeholder="username" />
+
+                    <input
+                        {...register('password', {
+                            required: "Уважаемый, поле password обязательно к заполнению",
+                            minLength: {
+                                value: 3,
+                                message: 'Уважаемый, минимальная длинна password 3 символа'
+                            }
+                        })}
+                        type="password" id="pass" placeholder="password" />
+                    <button type="submit">&#xf0da;</button>
+                    <p>forgot your password? <a href="https://www.google.com/">get out</a></p>
+
+                    {errors?.Login || errors.password
+                        ?
+                        <>
+                            {errors?.login?.message && errors?.password?.message
+                                ?
+                                <p style={{ color: 'brown' }}> Заполните два поля до конца </p>
+                                :
+                                <p style={{ color: 'brown' }}> {errors?.login?.message || errors?.password?.message}</p>
+                            }
+                        </>
+                        :
+                        <>
+                            {errorAuth}
+                        </>
+                    }
+
                 </form>
             </div>
-
 
             <div className="ocean">
                 <div className="wave"></div>
@@ -86,21 +103,6 @@ const Login = () => {
 };
 
 export default Login;
-
-// return (
-//     <div>
-//         <h1>Страница для логина</h1>
-//         <form onSubmit={login}>
-//             <MyInput type='text' placeholder='Введите логин' />
-//             <MyInput type='password' placeholder='Введите пароль' />
-//             <MyButton>Войти</MyButton>
-//         </form>
-//     </div>
-// );
-// };
-
-
-
 
 // <div>
 //             <h1>Если ты не гомосек, то зайди за пару сек</h1>

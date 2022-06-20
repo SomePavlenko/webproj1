@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Navigate} from 'react-router-dom';
 import { AuthContext } from '../../../context';
 import MyButton from '../button/MyButton';
 
@@ -17,8 +17,9 @@ const Navbar = () => {
                 Выйти
             </MyButton>
             <div className="navbar__links">
-                <Link to="/about"> O saite </Link>
-                <Link to="/posts"> Posts </Link>
+                {/* <MyButton><Link to='/about'> test</Link>  </MyButton> */}
+                <Link to="/about" className='link'> <MyButton ><p className='par'>О сайте</p> </MyButton> </Link>
+                <Link to="/posts" className='link'> <MyButton > <p className='par'> Посты </p>  </MyButton></Link>
             </div>
         </div>
     );
