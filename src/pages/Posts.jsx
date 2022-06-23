@@ -56,7 +56,6 @@ function Posts() {
             <MyButton style={{ marginTop: 30 }} onClick={() => setModal(true)}>
                 Создать пост
             </MyButton>
-            <button onClick={fetchPosts}> GET POSTS</button>
             <MyModal visible={modal} setVisible={setModal} >
                 <PostForm create={createPost} />
             </MyModal>
@@ -74,7 +73,7 @@ function Posts() {
                 title='Посты по JS'
             />
 
-            <div ref={lastElement} style={{ height: 20, background: 'red' }}>
+            <div ref={lastElement} style={{ height: 20 }}>
 
             </div>
 

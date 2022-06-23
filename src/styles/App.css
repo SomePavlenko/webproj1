@@ -66,26 +66,30 @@
     font-weight: bold;
 }
 
+
+
 .navbar{
+    display: flex;
     height: 60px;
     width: 100vw;
-    display: flex;
     align-items: center;
+    justify-content: space-between;
     padding: 0 25px;
     background: rgb(15, 22, 41);
 }
 
 .navbar__links{
-    margin-left: auto;
-    background:  rgb(15, 22, 41);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 10%;
+    background: rgb(15, 22, 41);
     
 }
 .link{
     /* margin-right: 15px; */
+    /* width: 50px; */
     background: rgb(15, 22, 41);
-    width: 50px;
+
     text-decoration: none;
-}
-.par{
-    /* background: rgb(15, 22, 41); */
 }

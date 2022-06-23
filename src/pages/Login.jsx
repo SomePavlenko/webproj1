@@ -86,7 +86,7 @@ const Login = () => {
                         </>
                         :
                         <>
-                            {errorAuth}
+                            <span className='errorAuth'>{errorAuth} </span>
                         </>
                     }
 
