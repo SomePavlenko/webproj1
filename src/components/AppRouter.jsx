@@ -22,7 +22,7 @@ const AppRouter = () => {
                 element={route.element} 
             />
         )}
-        <Route path="*" element={<Navigate replace to='/posts' />} />
+        <Route path="*" element={<Navigate replace to='/' />} />
         </Routes>
         :
         <Routes>

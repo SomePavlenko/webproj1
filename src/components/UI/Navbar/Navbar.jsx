@@ -27,6 +27,11 @@ const Navbar = () => {
                         Посты
                     </MyButton>
                 </Link>
+                <Link to="/" className='link'>
+                    <MyButton >
+                        Главная
+                    </MyButton>
+                </Link>
             </div>
         </div>
     );

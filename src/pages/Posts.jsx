@@ -30,7 +30,13 @@ function Posts() {
     })
 
     useObserver(lastElement, page < totalPages, isPostsLoading, () => {
-        setPage(page + 1);
+        if (page === 10){
+
+        }
+        else{
+
+            setPage(page + 1);
+        }
     })
 
     useEffect(() => {
@@ -72,7 +78,7 @@ function Posts() {
                 posts={sortedAndSearchedPosts}
                 title='Посты по JS'
             />
-
+            
             <div ref={lastElement} style={{ height: 20 }}>
 
             </div>
@@ -80,12 +86,16 @@ function Posts() {
             {isPostsLoading &&
                 <div style={{ display: 'flex', justifyContent: 'center', marginTop: 50 }}><Loader /></div>
             }
-
+            {(page === 10)
+            ? <hr/>
+            :
             <Pagination
                 page={page}
                 changePage={changePage}
                 totalPages={totalPages}
             />
+            }
+            
 
         </div>
 
